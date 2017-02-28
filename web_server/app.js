@@ -6,7 +6,9 @@ http.createServer(function(req, res) {
         'Content-Type': 'text/html' 
     });
 
-    var html = fs.readFileSync(__dirname + '/index.htm');
-
+    var html = fs.readFileSync(__dirname + '/index.htm', 'utf8');
+    var message = "Learning node.js is a joy so far";
+    html = html.replace('{Message}', message);
     res.end(html);
+    
 }).listen(1337, '127.0.0.1');
