@@ -11,4 +11,4 @@ http.createServer(function(req, res) {
     html = html.replace('{Message}', message);
     res.end(html);
     
-}).listen(1337, '127.0.0.1');
+}).listen(8080, '127.0.0.1');
