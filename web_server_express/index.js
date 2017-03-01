@@ -3,6 +3,7 @@ var bodyParser = require('body-parser');
 
 var app = express();
 
+var jsonParser = bodyParser.json();
 var urlencodedParser = bodyParser.urlencoded({extended: false})
 
 // Use env variable if exists, else use port 3000
@@ -22,7 +23,7 @@ app.use('/', function(req, res, next) {
 app.get('/', function(req, res) {
     res.send('<html><head><link href=assets/style.css type=text/css rel=stylesheet>' + 
     '</head><body><h1>Hello you!</h1>' +
-    '<form action="/person" method="post">' +
+    '<form action="/personJSON" method="post">' +
     'First name : <input type="text" name="firstname"></br>' + 
     'Last name : </input><input type=text" name ="lastname"</input></br>' +
     '<input type="submit" name="submit" value="Submit" />' +
@@ -41,4 +42,8 @@ app.post('/person', urlencodedParser, function(req, res) {
     res.send('Thank you!');
     console.log(req.body.firstname);
     console.log(req.body.lastname);
+})
+
+app.post('/personJSON', urlencodedParser, jsonParser, function(req, res) {
+    res.send('Thank you for the json data, ' + req.body.firstname + ' ' + req.body.lastname + '.');
 })
