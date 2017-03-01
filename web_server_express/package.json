@@ -9,6 +9,7 @@
   "author": "1legality",
   "license": "ISC",
   "dependencies": {
+    "body-parser": "^1.17.0",
     "express": "^4.14.1"
   }
 }
