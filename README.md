@@ -4,8 +4,20 @@ Just a bunch of node.js functions
 
 # use nodemon on linux
 
-By default, there is a limit in some linux system for how many files can be watched by a user. Using the following command in a terminal increases the limit.
+inotify watch limit can be reached easily with nodemon preventing nodemon from getting started. inotify watch limit can [be raised safely](http://askubuntu.com/questions/154255/how-can-i-tell-if-i-am-out-of-inotify-watches).
 
-``` bash
-echo fs.inotify.max_user_watches=582222 | sudo tee -a /etc/sysctl.conf && sudo sysctl -p
+##### Temporarily:
+
+Run 
+``` bash 
+sudo sysctl fs.inotify.max_user_watches=524288
 ```
+#### Permanently (more detailed info):
+
+put fs.inotify.max_user_watches=524288 into your sysctl settings. Depending on your system they might be in one of the following places:
+
+Debian/RedHat: /etc/sysctl.conf
+
+Arch: put a new file into /etc/sysctl.d/, e.g. /etc/sysctl.d/40-max-user-watches.conf
+
+you may wish to reload the sysctl settings to avoid a reboot: sysctl -p (Debian/RedHat) or sysctl --system (Arch)
